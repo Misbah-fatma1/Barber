@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Barber.Models.Appoint>
+@{
+    ViewData["Title"] = "Check Avaibility";
+}
+<h1> Check Availaibility</h1><br />
+    <div> 
+        
+   @ViewData["results"]
+        <form action="CheckAvaibility" >
+            <table>
+               
+                <tr>
+                     <td>Enter Your Number &nbsp;  </td>
+                     
+                    <td colspan="2">
+                       
+                      <input type="date"  class="btn btn-primary" name="Date" /> &nbsp;
+                       
+                       <input type="submit" value="Submit" class="btn btn-primary" />  
+                      
+                    </td>
+                </tr>
+
+            </table>
+            <br />
+        
+        @if ((IEnumerable<Barber.Models.Appoint>)ViewData["results"] != null)
+
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Date)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Time)
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in (IEnumerable<Barber.Models.Appoint>)ViewData["results"])
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Time)
+                        </td>
+                        <td> Booked</td>
+                    </tr>
+                }
+
+            </table>
+        }
+        else 
+        {
+            if( ViewData["results"] == null)
+            {
+                
+                <p>No match found </p>
+            }
+            
+
+        }
+    </form>
+        </div>
+         <div>
+   <a asp-controller="Appoints" asp-action="Index"><input type="submit" value=" Create Appointment" class="btn btn-primary" /> </a>
+</div>
+
+
